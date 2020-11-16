@@ -42,7 +42,6 @@ Widget::~Widget()
 }
 
 void Widget::onBtnClicked(){
-    //qDebug("button clicked");
     QPushButton* btn = (QPushButton*)sender();
     theBrain->doCommand(btn->text());
 }

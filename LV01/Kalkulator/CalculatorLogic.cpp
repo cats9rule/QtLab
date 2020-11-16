@@ -22,7 +22,7 @@ void CalculatorLogic::doCommand(QString command){
 
     if(command == "+"){
 
-        // store operation
+        // pamti operaciju
 
         operation = 1;
     }
@@ -40,8 +40,7 @@ void CalculatorLogic::doCommand(QString command){
     }
     else if(command == "←"){
 
-        // erase last input
-        // if its an operation, do nothing
+        // ako je poslednje uneta operacija, ne radi nista
 
         tempHistory.chop(1); // brise strelicu
 
@@ -50,11 +49,8 @@ void CalculatorLogic::doCommand(QString command){
             tempHistory.chop(1);
             sResult = tempNumber;
         }
-
     }
     else if(command == "±"){
-
-        // get last number and mul by -1
 
         sResult = QString::number(tempNumber.toDouble()*(-1));
         tempHistory = command + sResult;
@@ -62,7 +58,8 @@ void CalculatorLogic::doCommand(QString command){
     }
     else if(command == "√"){
 
-        // take last number and get sqrt
+        // ne moze koren iz negativnog broja
+
         if(sResult.toDouble()>=0){
 
             tempHistory = command + sResult + "=";
@@ -76,7 +73,7 @@ void CalculatorLogic::doCommand(QString command){
     }
     else if(command == "C"){
 
-        // clear all
+        // resetuje sve
 
         tempNumber = "";
         number1 = "";
@@ -92,11 +89,14 @@ void CalculatorLogic::doCommand(QString command){
 
         if(operation < 1 || (!number1.isEmpty() && tempHistory.isEmpty())){
 
-            // ako nije uneta operacija, ili je uneta operacija i samo prvi broj
-            // ne radi nista
+            // ako nije uneta operacija, ili je uneta operacija i samo prvi broj,
+            // onda ne treba da radi nista
 
             return;
         }
+
+        // rezultat = prvi broj (operacija) drugi broj
+        // u zavisnosti od opcode operation bira se odgovarajuca operacija
 
         switch(operation){
         case 1:
@@ -115,6 +115,9 @@ void CalculatorLogic::doCommand(QString command){
             break;
 
         case 4:
+
+            // ne moze deljenje nulom
+
             if(tempNumber.toDouble() != 0){
                 sResult = QString::number(number1.toDouble() / tempNumber.toDouble());
                 tempHistory += sResult;
@@ -129,16 +132,16 @@ void CalculatorLogic::doCommand(QString command){
     }
     else {
         // ako nije ukucana operacija, onda je ili cifra ili (decimalna tacka)
-        // pamti se broj
+        // pamti se broj u svakom slucaju
 
         tempNumber+=command;
         sResult = tempNumber;
     }
 
-
     emit resultChanged(sResult);
 
-    // ako je neka od sledecih konandi treba emit historyChanged
+    // ako je neka od sledecih komandi, treba emit historyChanged
+
     QString historyUpdaters = "±√C=";
 
     if(historyUpdaters.contains(command)){

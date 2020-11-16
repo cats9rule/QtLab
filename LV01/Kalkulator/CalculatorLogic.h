@@ -16,7 +16,8 @@ private:
 
     QString number1 = ""; // pamti broj pre unosa operacije
     QString tempNumber = ""; // temp var koji pamti broj
-    int operation=0; // kod operacije
+
+    int operation = 0; // kod operacije
 
 public:
     CalculatorLogic(QObject* parent = 0);
