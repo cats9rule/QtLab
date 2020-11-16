@@ -40,15 +40,19 @@ void CalculatorLogic::doCommand(QString command){
     }
     else if(command == "←"){
 
-        // ako je poslednje uneta operacija, ne radi nista
-
         tempHistory.chop(1); // brise strelicu
 
-        if(!tempNumber.isEmpty()){
-            tempNumber.chop(1);
-            tempHistory.chop(1);
-            sResult = tempNumber;
+        if(tempNumber.isEmpty()){
+
+            // ako je poslednje uneta operacija, ne radi nista
+
+            return;
         }
+
+        tempNumber.chop(1);
+        tempHistory.chop(1);
+        sResult = tempNumber;
+
     }
     else if(command == "±"){
 
