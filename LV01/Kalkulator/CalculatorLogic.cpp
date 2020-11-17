@@ -11,10 +11,29 @@ void CalculatorLogic::doCommand(QString command){
 
     QString operacije = "+-*/";
 
+    int size = tempHistory.size();
+
+    if(operation > 0 && operacije.contains(command) && operacije.contains(tempHistory.data()[size-1])){
+
+        // poslednje uneta je operacija, a ponovo je uneta operacija
+        // potrebno je izbrisati prethodnu operaciju
+
+        tempHistory.chop(1);
+    }
+
     tempHistory+=command;
 
     // ako prethodno nije uneta operacija, treba zapamtiti prvi broj
     if(operacije.contains(command) && operation == 0){
+
+        tempHistory.chop(1); // operacija treba da ide nakon prvog broja
+
+        if(tempHistory == ""){
+
+            // ako prvi broj ne postoji, upisati nulu
+            tempNumber = "0";
+        }
+
         number1 = tempNumber;
         tempNumber = "";
         tempHistory = number1 + command;
