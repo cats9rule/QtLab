@@ -19,6 +19,8 @@ private:
 
     int operation = 0; // kod operacije
 
+    //bool decimal = false; // zabranice duplu decimalnu tacku
+
 public:
     CalculatorLogic(QObject* parent = 0);
     virtual ~CalculatorLogic(){};
@@ -27,6 +29,8 @@ public:
     QString getHistory() const {return history;}
 
     void doCommand(QString command);
+
+    void executeOperation();
 
 
 signals:

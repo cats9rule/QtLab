@@ -9,11 +9,73 @@ void CalculatorLogic::doCommand(QString command){
     // number1 je prvi broj, tempNumber je drugi
     // operation: 1+ 2- 3* 4/ , 0-not valid
 
+    if(sResult == "nan" && command != "C"){
+
+        // ko ti kriv kad delis nulom slino jedna
+
+        return;
+    }
+
+    bool decimal = sResult.contains(".");
+
+    if(decimal && command == "."){
+
+        // ne moze dupli decimalni broj
+
+        return;
+    }
+
     QString operacije = "+-*/";
 
-    int size = tempHistory.size();
+    if(decimal && sResult.right(1) == "."){
 
-    if(operation > 0 && operacije.contains(command) && operacije.contains(tempHistory.data()[size-1])){
+        // ako je poslednje uneta decimalna tacka
+
+        int sizeTemp = sResult.size();
+
+        if(!command.data()[0].isDigit() && command != "←"){
+
+            // ako je sada uneta neka komanda, a ne cifra, tacka nije validna
+
+            sResult.chop(1);
+            tempNumber = sResult;
+            tempHistory.chop(1);
+        }
+        else if(sizeTemp == 1){
+
+            // ako je tacka prva u broju, ispred nje treba dodati nulu
+
+            sResult.insert(0, "0");
+            tempNumber = sResult;
+            tempHistory.chop(1);
+            tempHistory += "0.";
+
+        }
+    }
+
+    //int sizeHistory = tempHistory.size();
+
+
+//    if(!decimal){
+//        if(sizeTemp == 1 && tempNumber.data()[sizeTemp-1] == "."){
+
+//            tempNumber = "0.";
+//            tempHistory.chop(1);
+//            tempHistory += tempNumber;
+
+//            if(operacije.contains(command)){
+//                tempNumber.chop(1);
+//                tempHistory.chop(1);
+//            }
+//        }
+//    }
+//    else if(command == "."){
+
+//    }
+
+
+
+    if(operation > 0 && operacije.contains(command) && operacije.contains(tempHistory.right(1))){
 
         // poslednje uneta je operacija, a ponovo je uneta operacija
         // potrebno je izbrisati prethodnu operaciju
@@ -23,19 +85,35 @@ void CalculatorLogic::doCommand(QString command){
 
     tempHistory+=command;
 
+    if(operacije.contains(command) && operation > 0 && !tempNumber.isEmpty() && !number1.isEmpty()){
+
+        // postoje dva broja, postoji operacija, unesena je nova operacija
+        // treba sracunati vrednost nakon prve operacije, postaviti prvi broj na tu vrednost
+        // i spremiti za unos sledeceg broja
+
+        executeOperation();
+        number1 = sResult;
+        tempNumber = "";
+        decimal = false;
+    }
+
     // ako prethodno nije uneta operacija, treba zapamtiti prvi broj
     if(operacije.contains(command) && operation == 0){
 
         tempHistory.chop(1); // operacija treba da ide nakon prvog broja
 
-        if(tempHistory == ""){
+        tempNumber = sResult;
 
-            // ako prvi broj ne postoji, upisati nulu
+        if(tempNumber == ""){
+
+            // ako broj ne postoji, upisati nulu
             tempNumber = "0";
+            decimal = false;
         }
 
         number1 = tempNumber;
         tempNumber = "";
+        decimal = false;
         tempHistory = number1 + command;
     }
 
@@ -57,6 +135,7 @@ void CalculatorLogic::doCommand(QString command){
 
         operation = 4;
     }
+
     else if(command == "←"){
 
         tempHistory.chop(1); // brise strelicu
@@ -68,31 +147,68 @@ void CalculatorLogic::doCommand(QString command){
             return;
         }
 
+
         tempNumber.chop(1);
         tempHistory.chop(1);
         sResult = tempNumber;
 
     }
+
     else if(command == "±"){
 
-        sResult = QString::number(tempNumber.toDouble()*(-1));
-        tempHistory = command + sResult;
+        if(operation > 0 && !tempNumber.isEmpty() && !number1.isEmpty()){
+            executeOperation();
+            number1 = sResult;
+        }
+
+        if(number1.isEmpty()){
+            number1 = tempNumber;
+        }
+
+        sResult = QString::number(number1.toDouble()*(-1));
+        tempHistory.chop(1);
+
+        if(tempHistory.isEmpty()){
+            tempHistory = number1;
+        }
+        if(number1.isEmpty()){
+            tempHistory += "0";
+        }
+
+        tempHistory += ")=" + sResult;
+        tempHistory.insert(0, "(");
+        tempHistory.insert(0, command);
+
+        number1 = tempNumber = "";
 
     }
+
     else if(command == "√"){
+
+        tempHistory.chop(1);
+
+        if(operation > 0 && !tempNumber.isEmpty() && !number1.isEmpty()){
+            executeOperation();
+            number1 = sResult;
+        }
+
+        if(number1.isEmpty()){
+            number1 = tempNumber;
+        }
 
         // ne moze koren iz negativnog broja
 
         if(sResult.toDouble()>=0){
 
-            tempHistory = command + sResult + "=";
             sResult = QString::number(sqrt(sResult.toDouble()));
-            tempHistory += sResult;
         }
-
         else {
-            tempHistory = command + tempNumber + "=" + "NAN";
+            sResult = "nan";
         }
+        tempHistory.insert(0, "(");
+        tempHistory.insert(0, command);
+        tempHistory += ")=";
+        tempHistory += sResult;
     }
     else if(command == "C"){
 
@@ -118,44 +234,21 @@ void CalculatorLogic::doCommand(QString command){
             return;
         }
 
-        // rezultat = prvi broj (operacija) drugi broj
-        // u zavisnosti od opcode operation bira se odgovarajuca operacija
+        executeOperation(); // postavlja sResult na vrednost
+        tempHistory += sResult;
+        number1 = sResult;
+        tempNumber = "";
 
-        switch(operation){
-        case 1:
-            sResult = QString::number(number1.toDouble() + tempNumber.toDouble());
-            tempHistory += sResult;
-            break;
-
-        case 2:
-            sResult = QString::number(number1.toDouble() - tempNumber.toDouble());
-            tempHistory += sResult;
-            break;
-
-        case 3:
-            sResult = QString::number(number1.toDouble() * tempNumber.toDouble());
-            tempHistory += sResult;
-            break;
-
-        case 4:
-
-            // ne moze deljenje nulom
-
-            if(tempNumber.toDouble() != 0){
-                sResult = QString::number(number1.toDouble() / tempNumber.toDouble());
-                tempHistory += sResult;
-            }
-            else{
-                tempHistory += "NAN";
-            }
-            break;
-        }
         operation = 0;
 
     }
     else {
         // ako nije ukucana operacija, onda je ili cifra ili (decimalna tacka)
         // pamti se broj u svakom slucaju
+
+        if(command == "."){
+            decimal = true;
+        }
 
         tempNumber+=command;
         sResult = tempNumber;
@@ -169,9 +262,44 @@ void CalculatorLogic::doCommand(QString command){
 
     if(historyUpdaters.contains(command)){
         history += tempHistory + "\n";
-        tempHistory = "";
-        tempNumber = sResult;
+        tempHistory = sResult;
+        number1 = sResult;
+        operation = 0;
         emit resultHistoryChanged(history);
     }
 
+}
+
+void CalculatorLogic::executeOperation(){
+
+    // ne dira history, samo racuna
+
+    // rezultat = prvi broj (operacija) drugi broj
+    // u zavisnosti od opcode operation bira se odgovarajuca operacija
+
+    switch(operation){
+    case 1:
+        sResult = QString::number(number1.toDouble() + tempNumber.toDouble());
+        break;
+
+    case 2:
+        sResult = QString::number(number1.toDouble() - tempNumber.toDouble());
+        break;
+
+    case 3:
+        sResult = QString::number(number1.toDouble() * tempNumber.toDouble());
+        break;
+
+    case 4:
+
+        // ne moze deljenje nulom
+
+        if(tempNumber.toDouble() != 0){
+            sResult = QString::number(number1.toDouble() / tempNumber.toDouble());
+        }
+        else{
+            sResult = "nan";
+        }
+        break;
+    }
 }
