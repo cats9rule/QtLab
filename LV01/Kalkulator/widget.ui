@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>895</width>
-    <height>495</height>
+    <height>455</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -19,7 +19,7 @@
   <property name="minimumSize">
    <size>
     <width>895</width>
-    <height>495</height>
+    <height>455</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -28,12 +28,15 @@
   <property name="layoutDirection">
    <enum>Qt::LeftToRight</enum>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(25, 28, 38);</string>
+  </property>
   <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,1">
    <property name="sizeConstraint">
     <enum>QLayout::SetNoConstraint</enum>
    </property>
    <item>
-    <layout class="QVBoxLayout" name="verticalLayout" stretch="1,1">
+    <layout class="QVBoxLayout" name="verticalLayout" stretch="1,0">
      <item>
       <widget class="QLineEdit" name="leInput">
        <property name="sizePolicy">
@@ -65,6 +68,13 @@
          <pointsize>16</pointsize>
         </font>
        </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(17, 19, 25);
+color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="frame">
+        <bool>false</bool>
+       </property>
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
@@ -94,6 +104,10 @@
            <pointsize>12</pointsize>
           </font>
          </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(48, 14, 35);
+color: rgb(255, 255, 255);</string>
+         </property>
          <property name="text">
           <string>=</string>
          </property>
@@ -117,6 +131,10 @@
           <font>
            <pointsize>12</pointsize>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(32, 35, 48);
+color: rgb(255, 255, 255);</string>
          </property>
          <property name="text">
           <string>4</string>
@@ -142,6 +160,10 @@
            <pointsize>12</pointsize>
           </font>
          </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(54, 58, 65);
+color: rgb(255, 188, 80)</string>
+         </property>
          <property name="text">
           <string>/</string>
          </property>
@@ -165,6 +187,10 @@
           <font>
            <pointsize>12</pointsize>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(54, 58, 65);
+color: rgb(255, 188, 80)</string>
          </property>
          <property name="text">
           <string>*</string>
@@ -190,6 +216,10 @@
            <pointsize>12</pointsize>
           </font>
          </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(32, 35, 48);
+color: rgb(255, 255, 255);</string>
+         </property>
          <property name="text">
           <string>.</string>
          </property>
@@ -213,6 +243,10 @@
           <font>
            <pointsize>12</pointsize>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(48, 14, 35);
+color: rgb(255, 255, 255);</string>
          </property>
          <property name="text">
           <string>C</string>
@@ -238,6 +272,10 @@
            <pointsize>12</pointsize>
           </font>
          </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(32, 35, 48);
+color: rgb(255, 255, 255);</string>
+         </property>
          <property name="text">
           <string>0</string>
          </property>
@@ -261,6 +299,10 @@
           <font>
            <pointsize>12</pointsize>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(48, 14, 35);
+color: rgb(255, 255, 255);</string>
          </property>
          <property name="text">
           <string>√</string>
@@ -286,6 +328,10 @@
            <pointsize>12</pointsize>
           </font>
          </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(48, 14, 35);
+color: rgb(255, 255, 255);</string>
+         </property>
          <property name="text">
           <string>±</string>
          </property>
@@ -309,6 +355,10 @@
           <font>
            <pointsize>12</pointsize>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(32, 35, 48);
+color: rgb(255, 255, 255);</string>
          </property>
          <property name="text">
           <string>6</string>
@@ -334,6 +384,10 @@
            <pointsize>12</pointsize>
           </font>
          </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(48, 14, 35);
+color: rgb(255, 255, 255);</string>
+         </property>
          <property name="text">
           <string>←</string>
          </property>
@@ -357,6 +411,10 @@
           <font>
            <pointsize>12</pointsize>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(32, 35, 48);
+color: rgb(255, 255, 255);</string>
          </property>
          <property name="text">
           <string>1</string>
@@ -382,6 +440,10 @@
            <pointsize>12</pointsize>
           </font>
          </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(32, 35, 48);
+color: rgb(255, 255, 255);</string>
+         </property>
          <property name="text">
           <string>5</string>
          </property>
@@ -405,6 +467,10 @@
           <font>
            <pointsize>12</pointsize>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(32, 35, 48);
+color: rgb(255, 255, 255);</string>
          </property>
          <property name="text">
           <string>8</string>
@@ -430,6 +496,10 @@
            <pointsize>12</pointsize>
           </font>
          </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(32, 35, 48);
+color: rgb(255, 255, 255);</string>
+         </property>
          <property name="text">
           <string>7</string>
          </property>
@@ -453,6 +523,10 @@
           <font>
            <pointsize>12</pointsize>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(54, 58, 65);
+color: rgb(255, 188, 80)</string>
          </property>
          <property name="text">
           <string>+</string>
@@ -478,6 +552,10 @@
            <pointsize>12</pointsize>
           </font>
          </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(32, 35, 48);
+color: rgb(255, 255, 255);</string>
+         </property>
          <property name="text">
           <string>2</string>
          </property>
@@ -501,6 +579,10 @@
           <font>
            <pointsize>12</pointsize>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(32, 35, 48);
+color: rgb(255, 255, 255);</string>
          </property>
          <property name="text">
           <string>9</string>
@@ -526,6 +608,10 @@
            <pointsize>12</pointsize>
           </font>
          </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(54, 58, 65);
+color: rgb(255, 188, 80)</string>
+         </property>
          <property name="text">
           <string>-</string>
          </property>
@@ -549,6 +635,10 @@
           <font>
            <pointsize>12</pointsize>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(32, 35, 48);
+color: rgb(255, 255, 255);</string>
          </property>
          <property name="text">
           <string>3</string>
@@ -577,6 +667,13 @@
       <font>
        <pointsize>16</pointsize>
       </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(17, 19, 25);
+color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
      </property>
      <property name="readOnly">
       <bool>true</bool>
