@@ -19,7 +19,7 @@ void ChartView::paintEvent(QPaintEvent*){
     const int a = H - 2*Ym; // duzina y-ose
     const int r = a/10; // jedinicna duz skale
     int razmak = l/10; // razmak izmedju stubaca
-    const int crta = r/5; // duzina crte na skali
+    const int crta = razmak/10; // duzina crte na skali
 
     QPainter p(this);
     QPen pen(Qt::black,1);
@@ -31,7 +31,7 @@ void ChartView::paintEvent(QPaintEvent*){
     int broj = 100;
     for(int i=0;i<=10;i++){ // skala
         p.drawLine(Xm-crta,Ym+i*r, Xm,Ym+i*r);
-        p.drawText(Xm-3*crta,Ym+i*r, QString::number(broj));
+        p.drawText(Xm-4*crta,Ym+i*r, QString::number(broj));
         broj-=10;
     }
 
@@ -94,7 +94,6 @@ void ChartView::mouseDoubleClickEvent(QMouseEvent* event){
             m_chartDoc->m_points[index]->setValue(dialog.getValue());
             m_chartDoc->m_points[index]->setColour(dialog.getColour());
         }
-        onChartDataChanged();
         emit m_chartDoc->chartDataChanged();
     }
 }
