@@ -39,6 +39,14 @@ void ChartDoc::loadChartFromFile(QString file){
 
         // check format data needed here!!!
         stub->setLabel(data[0]);
+
+        if(data[1].toFloat()<0){
+            data[1] = "0";
+        }
+        else if(data[1].toFloat()>100){
+            data[1] = "100";
+        }
+
         stub->setValue(data[1].toFloat());
         stub->setColour(data[2]);
 

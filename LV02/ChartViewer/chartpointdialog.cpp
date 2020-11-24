@@ -6,14 +6,14 @@ ChartPointDialog::ChartPointDialog(QWidget *parent) :
     ui(new Ui::ChartPointDialog)
 {
     ui->setupUi(this);
-    ui->leValue->setValidator(new QIntValidator(0, 100, this));
+    ui->leValue->setValidator(new QDoubleValidator(0, 100, 2, this));
 }
 ChartPointDialog::ChartPointDialog(QString label, float value, QColor colour, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ChartPointDialog)
 {
     ui->setupUi(this);
-    ui->leValue->setValidator(new QIntValidator(0, 100, this));
+    ui->leValue->setValidator(new QDoubleValidator(0, 100, 2, this));
     ui->leLabel->setText(label);
     ui->leValue->setText(QString::number(value));
     ui->leColour->setText(colour.name());
