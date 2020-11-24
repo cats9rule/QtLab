@@ -1,0 +1,6 @@
+prvo,80,#cdcdcd
+drugo,50,#9dd8fc
+trece,10,#d699f2
+prvo,80,#cdcdcd
+drugo,50,#9dd8fc
+trece,10,#d699f2
