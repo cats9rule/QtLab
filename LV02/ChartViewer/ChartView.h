@@ -12,11 +12,12 @@ class ChartView : public QWidget
     Q_OBJECT
 
 private:
-    ChartDoc* m_chartDoc;
-    QList<QRect*> bars;
+    ChartDoc* m_chartDoc; //pamti podatke o stubovima
+    QList<QRect*> bars; // pamti QRect koji predstavljaju stubove - za iscrtavanje
 
 public:
     explicit ChartView(QWidget *parent = nullptr);
+    ~ChartView();
     void setChartDoc(ChartDoc* obj) {this->m_chartDoc = obj;}
     void mouseDoubleClickEvent(QMouseEvent* event);
     void paintEvent(QPaintEvent*);

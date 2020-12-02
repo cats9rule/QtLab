@@ -1,0 +1,20 @@
+<RCC>
+    <qresource prefix="/santa/front">
+        <file>resources/santa1.png</file>
+        <file>resources/santa2.png</file>
+    </qresource>
+    <qresource prefix="/santa/left">
+        <file>resources/santa-left1.png</file>
+        <file>resources/santa-left2.png</file>
+    </qresource>
+    <qresource prefix="/santa/right">
+        <file>resources/santa-right1.png</file>
+        <file>resources/santa-right2.png</file>
+    </qresource>
+    <qresource prefix="/snowman">
+        <file>resources/snowman.png</file>
+    </qresource>
+    <qresource prefix="/tree">
+        <file>resources/tree.png</file>
+    </qresource>
+</RCC>

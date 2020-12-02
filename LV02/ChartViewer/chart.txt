@@ -1,6 +1,6 @@
-prvo,80,#cdcdcd
+prvo,75,#ffaa7f
 drugo,50,#9dd8fc
 trece,10,#d699f2
-prvo,80,#cdcdcd
-drugo,50,#9dd8fc
-trece,10,#d699f2
+cetvrto,90,#55ff7f
+peto,35,#aaaaff
+sesto,60,#ffff7f

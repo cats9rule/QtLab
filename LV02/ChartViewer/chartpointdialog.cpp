@@ -40,7 +40,7 @@ QColor ChartPointDialog::getColour(){
     return color;
 }
 
-void ChartPointDialog::on_tbColour_clicked()
+void ChartPointDialog::on_tbColour_clicked() // klikom na tool button bira se boja
 {
     QColorDialog colorDialog;
     if(colorDialog.exec() == QDialog::Accepted)

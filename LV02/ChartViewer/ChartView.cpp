@@ -9,6 +9,18 @@ void ChartView::onChartDataChanged(){
     repaint();
 }
 
+ChartView::~ChartView(){
+    int count = bars.count();
+    if(count > 0){
+        for(int i=0;i<count;i++){
+            if(bars[i] != nullptr){
+                delete bars[i];
+                bars[i] = nullptr;
+            }
+        }
+    }
+}
+
 void ChartView::paintEvent(QPaintEvent*){
 
     const int W = this->width();
@@ -25,7 +37,7 @@ void ChartView::paintEvent(QPaintEvent*){
     QPen pen(Qt::black,1);
     p.setPen(pen);
 
-    // draw lines n stuff
+    // iscrtavanje osa i podeoka na osama
     p.drawLine(Xm, Ym, Xm, Ym+a); // y-osa
     p.drawLine(Xm, Ym+a, Xm+l, Ym+a); // x-osa
     int broj = 100;
@@ -38,7 +50,6 @@ void ChartView::paintEvent(QPaintEvent*){
     // using data from chartDoc
     int count = m_chartDoc->m_points.count(); // br stubaca
     if(count!=0){
-
         if(!bars.isEmpty()){
             for(int i=0;i<bars.count();i++){
                 if(bars[i]!= nullptr){
@@ -46,7 +57,6 @@ void ChartView::paintEvent(QPaintEvent*){
                 }
             }
         }
-
         bars.clear(); // lista stubaca, pamti QRect
         razmak /= count;
         int d = (l-razmak*count)/count; // sirina jednog stuba
